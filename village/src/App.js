@@ -9,6 +9,7 @@ import Smurfs from './components/Smurfs';
 const HeaderOne = styled.h1`
   color: steelblue;
   text-align: center;
+  margin-bottom: 42px;
 `;
 
 const NavBar = styled.nav`
