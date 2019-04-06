@@ -3,10 +3,8 @@ import { Route, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
-import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
-
 
 const HeaderOne = styled.h1`
   color: steelblue;
@@ -14,8 +12,6 @@ const HeaderOne = styled.h1`
 `;
 
 const NavBar = styled.nav`
-  /* list-style: none;
-  padding-inline-start: unset; */
   background-color: lightblue;
   margin-bottom: 20px;
   padding: 2%;
