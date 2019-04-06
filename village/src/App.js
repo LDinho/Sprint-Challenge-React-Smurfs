@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
+import Smurf from './components/Smurf';
 
 const HeaderOne = styled.h1`
   color: steelblue;
@@ -97,12 +98,31 @@ class App extends Component {
                   deleteSmurf={this.deleteSmurf}
           />
         )}/>
+
         <Route path='/smurf-form' render={(props) => (
           <SmurfForm {...props}
                      updateSmurfList={this.updateSmurfList}
           />
         )}/>
 
+        <Route path='/smurfs/:id' render={(props) => {
+          console.log("STATE::", this.state.smurfs);
+          console.log('PROPS.MATCH.PARAMS.ID:', props.match.params.id);
+
+          const smurfSelected = this.state.smurfs.find((smurf) => {
+            return smurf.id === Number(props.match.params.id);
+          })
+          console.log('SMURFFound:', smurfSelected);
+
+          return (
+            <Smurf {...props}
+                   id={smurfSelected.id}
+                   name={smurfSelected.name}
+                   age={smurfSelected.age}
+                   height={smurfSelected.height}
+            />
+          )
+        }}/>
       </div>
     );
   }
