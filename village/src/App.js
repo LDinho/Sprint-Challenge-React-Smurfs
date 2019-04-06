@@ -1,10 +1,42 @@
 import React, { Component } from 'react';
 import { Route, NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 import axios from 'axios';
 
 import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
+
+
+const HeaderOne = styled.h1`
+  color: steelblue;
+  text-align: center;
+`;
+
+const NavBar = styled.nav`
+  /* list-style: none;
+  padding-inline-start: unset; */
+  background-color: lightblue;
+  margin-bottom: 20px;
+  padding: 2%;
+`;
+
+const NavLinkWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
+  font-size: 26px;
+  color: white;
+  
+  &:hover {
+   // text-decoration: underline;
+   color: steelblue;
+   // font-size: 26px;
+  }
+`;
 
 class App extends Component {
   constructor(props) {
@@ -48,13 +80,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav>
-          <h1>My Favorite Smurfs</h1>
-          <div>
-            <NavLink exact to="/">Smurf Home</NavLink>
-            <NavLink to="/smurf-form">Add a Smurf</NavLink>
-          </div>
-        </nav>
+        <NavBar>
+          <HeaderOne>My Favorite Smurfs</HeaderOne>
+          <NavLinkWrapper>
+            <StyledNavLink exact to="/" activeStyle={{
+              fontWeight: "bold",
+              color: "steelblue"
+            }}>Smurf Home</StyledNavLink>
+            <StyledNavLink to="/smurf-form" activeStyle={{
+              fontWeight: "bold",
+              color: "steelblue"
+            }}>Add a Smurf</StyledNavLink>
+          </NavLinkWrapper>
+        </NavBar>
 
         <Route exact path='/' render={(props) => (
           <Smurfs {...props}
