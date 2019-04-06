@@ -15,7 +15,7 @@ class SmurfForm extends Component {
     event.preventDefault();
     axios.post('http://localhost:3333/smurfs', this.state)
       .then((res) => {
-        console.log("RESPONSE FROM POST::::", res.data);
+        this.props.updateSmurfList(res.data);
 
         this.setState({
           name: '',

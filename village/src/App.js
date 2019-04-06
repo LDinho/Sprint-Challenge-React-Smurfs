@@ -26,10 +26,16 @@ class App extends Component {
       });
   }
 
+  updateSmurfList = (smurfs) => {
+    this.setState({
+      smurfs,
+    }, ()=> {console.log('NewSmurfList:', smurfs)})
+  }
+
   render() {
     return (
       <div className="App">
-        <SmurfForm />
+        <SmurfForm updateSmurfList={this.updateSmurfList} />
         <Smurfs smurfs={this.state.smurfs} />
       </div>
     );
