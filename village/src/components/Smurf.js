@@ -50,7 +50,6 @@ const Button = styled.button`
 const Smurf = props => {
   const {id, name, age, height} = props;
 
-  console.log("SMURF CARD:", props);
   return (
     <SmurfCard>
       <CardContent>

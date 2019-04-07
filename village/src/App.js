@@ -47,7 +47,6 @@ class App extends Component {
   componentDidMount() {
     axios.get('http://localhost:3333/smurfs')
       .then((res) => {
-        console.log('RES.DATA:', res.data);
         this.setState({
           smurfs: res.data,
         })
@@ -106,17 +105,17 @@ class App extends Component {
         )}/>
 
         <Route path='/smurfs/:id' render={(props) => {
-          console.log("STATE::", this.state.smurfs);
-          console.log('PROPS.MATCH.PARAMS.ID:', props.match.params.id);
 
           const smurfSelected = this.state.smurfs.find((smurf) => {
             return smurf.id === Number(props.match.params.id);
-          })
-          console.log('SMURFFound:', smurfSelected);
+          });
+
+          if (!smurfSelected) {
+            return <div>Loading...</div>
+          }
 
           return (
-            <Smurf {...props}
-                   id={smurfSelected.id}
+            <Smurf id={smurfSelected.id}
                    name={smurfSelected.name}
                    age={smurfSelected.age}
                    height={smurfSelected.height}
@@ -129,3 +128,21 @@ class App extends Component {
 }
 
 export default App;
+
+/*
+Notes on preventing 'id not found error' if page is refreshed on the single smurf view:
+
+const smurfSelected = this.state.smurfs.find((smurf) => {
+            return smurf.id === Number(props.match.params.id);
+
+          }) || {}   //Option A- setting a default
+
+
+ return ( // Option B-
+            <Smurf id={smurfSelected && smurfSelected.id}
+                   name={smurfSelected && smurfSelected.name}
+                   age={smurfSelected && smurfSelected.age}
+                   height={smurfSelected && smurfSelected.height}
+            />
+          )
+ */
