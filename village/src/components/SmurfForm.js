@@ -3,7 +3,13 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 const FormWrapper = styled.div`
-  //ToDo- Future styling
+  p {
+    color: blue;
+    font-size: 24px;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+  }
 `;
 
 const Form = styled.form`
@@ -15,6 +21,7 @@ const Form = styled.form`
   border-radius: 2px;
   margin: 80px;
   padding: 6%;
+  position: relative;
   
   input {
     background-color: white;
@@ -52,7 +59,9 @@ class SmurfForm extends Component {
     this.state = {
       name: '',
       age: '',
-      height: ''
+      height: '',
+      addSuccess: false,
+      errorMessage: null,
     };
   }
 
@@ -66,10 +75,16 @@ class SmurfForm extends Component {
           name: '',
           age: '',
           height: '',
+          addSuccess: true,
+          errorMessage: null,
         });
       })
       .catch((error) => {
         console.error('Server Error', error);
+        this.setState({
+          errorMessage: true,
+          addSuccess: false
+        })
       });
   }
 
@@ -100,7 +115,16 @@ class SmurfForm extends Component {
             name="height"
           />
           <button type="submit">Add to the village</button>
+
+          {this.state.addSuccess && <p>Smurf Added!!</p>}
+
+          {this.state.errorMessage &&
+            <p style={{color: 'red'}}>
+              Smurf alert! Please fill out all fields!!
+            </p>
+          }
         </Form>
+
       </FormWrapper>
     );
   }

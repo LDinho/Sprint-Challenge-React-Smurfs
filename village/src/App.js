@@ -30,9 +30,7 @@ const StyledNavLink = styled(NavLink)`
   color: white;
   
   &:hover {
-   // text-decoration: underline;
    color: steelblue;
-   // font-size: 26px;
   }
 `;
 
