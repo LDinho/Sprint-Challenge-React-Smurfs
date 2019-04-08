@@ -20,6 +20,8 @@ const UnOrderedList = styled.ul`
   
   list-style: none;
   padding-inline-start: unset;
+  margin: 0 auto;
+  width: 800px;
 `;
 
 class Smurfs extends Component {
