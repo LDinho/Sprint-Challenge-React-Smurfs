@@ -34,6 +34,12 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
+const UnOrderedList = styled.ul`
+  padding-inline-start: unset;
+  margin: 0 auto;
+  max-width: 900px;
+`;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -113,11 +119,14 @@ class App extends Component {
           }
 
           return (
-            <Smurf id={smurfSelected.id}
-                   name={smurfSelected.name}
-                   age={smurfSelected.age}
-                   height={smurfSelected.height}
-            />
+            <UnOrderedList>
+              <Smurf id={smurfSelected.id}
+                     name={smurfSelected.name}
+                     age={smurfSelected.age}
+                     height={smurfSelected.height}
+                     deleteSmurf={this.deleteSmurf}
+              />
+            </UnOrderedList>
           )
         }}/>
       </div>

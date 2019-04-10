@@ -8,7 +8,6 @@ const SmurfCard = styled.li`
   align-items: center;
   border: 1px solid lightblue;
   margin-bottom: 30px;
-  list-style: none;
 `;
 
 const CardContent = styled.div`

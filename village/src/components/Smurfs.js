@@ -11,17 +11,10 @@ const HeaderOne = styled.h1`
 `;
 
 const UnOrderedList = styled.ul`
-
   display: flex;
   flex-direction: column;
-  text-align: center;
   position: relative;
-  justify-content: center;
-  
-  list-style: none;
   padding-inline-start: unset;
-  margin: 0 auto;
-  width: 800px;
 `;
 
 class Smurfs extends Component {
@@ -29,7 +22,7 @@ class Smurfs extends Component {
     const {deleteSmurf} = this.props;
 
     return (
-      <div className="Smurfs">
+      <div className="smurfs-list-wrapper">
         <HeaderOne>Smurf Village</HeaderOne>
         <UnOrderedList>
           {this.props.smurfs.map(smurf => {
