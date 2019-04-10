@@ -66,9 +66,11 @@ class App extends Component {
     }, ()=> {console.log('NewSmurfList:', smurfs)})
   }
 
-  deleteSmurf = (smurfId) => {
+  deleteSmurf = (smurfId, callback = ()=>{}) => {
     axios.delete(`http://localhost:3333/smurfs/${smurfId}`)
       .then( (res) => {
+        callback();
+
         this.setState({
           smurfs: res.data,
         })
@@ -124,7 +126,13 @@ class App extends Component {
                      name={smurfSelected.name}
                      age={smurfSelected.age}
                      height={smurfSelected.height}
-                     deleteSmurf={this.deleteSmurf}
+                     deleteSmurf={(smurfId) => {
+                       const routeToHome = () => {
+                         props.history.push('/');
+                       };
+
+                       this.deleteSmurf(smurfId, routeToHome);
+                     }}
               />
             </UnOrderedList>
           )
