@@ -1,4 +1,57 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
+
+const FormWrapper = styled.div`
+  p {
+    color: blue;
+    font-size: 24px;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+  }
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  border: 1px solid lightblue;
+  border-radius: 2px;
+  margin: 80px;
+  padding: 6%;
+  position: relative;
+  
+  input {
+    background-color: white;
+    border: 1px solid lightblue;
+    border-radius: 4px;
+    margin-bottom: 18px;
+    padding: 2%;
+    width: 50%;
+    font-size: 20px;
+  }
+  
+  input[name=name] {
+    margin-top: 40px;
+  }
+  
+  button {
+    border: 1px solid lightblue;
+    border-radius: 4px;
+    background-color: lightblue;
+    color: midnightblue;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+    padding: 8px;
+    
+    &:hover {
+      background-color: white;
+    }
+  }
+`;
 
 class SmurfForm extends Component {
   constructor(props) {
@@ -6,19 +59,33 @@ class SmurfForm extends Component {
     this.state = {
       name: '',
       age: '',
-      height: ''
+      height: '',
+      addSuccess: false,
+      errorMessage: null,
     };
   }
 
   addSmurf = event => {
     event.preventDefault();
-    // add code to create the smurf using the api
+    axios.post('http://localhost:3333/smurfs', this.state)
+      .then((res) => {
+        this.props.updateSmurfList(res.data);
 
-    this.setState({
-      name: '',
-      age: '',
-      height: ''
-    });
+        this.setState({
+          name: '',
+          age: '',
+          height: '',
+          addSuccess: true,
+          errorMessage: null,
+        });
+      })
+      .catch((error) => {
+        console.error('Server Error', error);
+        this.setState({
+          errorMessage: true,
+          addSuccess: false
+        })
+      });
   }
 
   handleInputChange = e => {
@@ -27,8 +94,8 @@ class SmurfForm extends Component {
 
   render() {
     return (
-      <div className="SmurfForm">
-        <form onSubmit={this.addSmurf}>
+      <FormWrapper>
+        <Form onSubmit={this.addSmurf}>
           <input
             onChange={this.handleInputChange}
             placeholder="name"
@@ -48,8 +115,17 @@ class SmurfForm extends Component {
             name="height"
           />
           <button type="submit">Add to the village</button>
-        </form>
-      </div>
+
+          {this.state.addSuccess && <p>Smurf Added!!</p>}
+
+          {this.state.errorMessage &&
+            <p style={{color: 'red'}}>
+              Smurf alert! Please fill out all fields!!
+            </p>
+          }
+        </Form>
+
+      </FormWrapper>
     );
   }
 }
